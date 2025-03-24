@@ -1,6 +1,5 @@
 import { Request, Response } from "express";
 import { orderSchema } from "../model/order.model";
-import { MongoDB } from "../mongoDB";
 import { RunConnection } from "../mongoDB";
 
 export const getAllOrder = async (req: Request, res: Response) => {

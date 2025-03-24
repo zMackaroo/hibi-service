@@ -28,5 +28,7 @@ export async function MongoDB() {
 }
 
 export async function RunConnection() {
-  await mongoose.connect(`${process.env.MONGO_URL}`);
+  await mongoose.connect(
+    "mongodb+srv://hibiadmin:Sep09051997!!@hibi.kl1sc.mongodb.net/collections?retryWrites=true&w=majority&appName=Hibi"
+  );
 }
