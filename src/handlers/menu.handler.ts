@@ -5,9 +5,9 @@ import { RunConnection } from "../mongoDB";
 export const getAllMenu = async (req: Request, res: Response) => {
   try {
     // await RunConnection();
-    // const menu = await menuSchema.find();
-    // res.status(200).json({ data: menu });
-    res.json({ message: "Hello" });
+    const menu = await menuSchema.find();
+    res.status(200).json({ data: menu });
+    // res.json({ message: "Hello" });
   } catch (error) {
     res.status(500).json({ message: error });
   }
