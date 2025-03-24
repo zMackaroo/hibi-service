@@ -1,8 +1,10 @@
 import { Request, Response } from "express";
 import { orderSchema } from "../model/order.model";
+import { MongoDB } from "../mongoDB";
 
 export const getAllOrder = async (req: Request, res: Response) => {
   try {
+    await MongoDB();
     const order = await orderSchema.find();
     res.status(200).json({ data: order });
   } catch (error) {
@@ -12,6 +14,7 @@ export const getAllOrder = async (req: Request, res: Response) => {
 
 export const createOrder = async (req: Request, res: Response) => {
   try {
+    await MongoDB();
     const { customerName, customerPhone, orders, totalPrice, status } =
       req.body;
     const order = await orderSchema.create({
@@ -29,6 +32,7 @@ export const createOrder = async (req: Request, res: Response) => {
 
 export const updateOrder = async (req: Request, res: Response) => {
   try {
+    await MongoDB();
   } catch (error) {
     res.status(500).json({ message: error });
   }
