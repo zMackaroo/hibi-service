@@ -1,6 +1,5 @@
 import { Request, Response } from "express";
 import { menuSchema } from "../model/menu.model";
-import { RunConnection } from "../mongoDB";
 
 export const getAllMenu = async (req: Request, res: Response) => {
   try {
@@ -13,7 +12,6 @@ export const getAllMenu = async (req: Request, res: Response) => {
 
 export const createMenu = async (req: Request, res: Response) => {
   try {
-    await RunConnection();
     const { name, price, description, image, category, isActive } = req.body;
     const menu = await menuSchema.create({
       name,
