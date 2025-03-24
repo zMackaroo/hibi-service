@@ -9,7 +9,6 @@ MongoDB();
 app.use(helmet());
 app.use(express.json());
 app.use(cors());
-app.options("*", cors());
 
 app.get("/", (req, res) => {
   res.send("Hello from api");
