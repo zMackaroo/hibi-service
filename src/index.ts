@@ -8,7 +8,7 @@ const app = express();
 MongoDB();
 app.use(helmet());
 app.use(express.json());
-app.use(cors());
+app.use(cors({ origin: "*" }));
 
 app.get("/", (req, res) => {
   res.send("Hello from api");
