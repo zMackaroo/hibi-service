@@ -16,7 +16,7 @@
         },
         {
           "key": "Content-Security-Policy",
-          "value": "default-src * 'self' data: blob:; connect-src * 'self' https: wss:;"
+          "value": "default-src * 'self' data: blob:; connect-src * https:; script-src 'self' 'unsafe-inline' 'unsafe-eval';"
         }
       ]
     }
