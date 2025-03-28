@@ -8,15 +8,24 @@ const app = express();
 MongoDB();
 app.use(helmet());
 app.use(express.json());
+
+// ✅ FIX: Configure CORS properly
+app.use(
+  cors({
+    origin: "*", // Allow all origins (or specify specific domains)
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"], // Allowed methods
+    allowedHeaders: ["Content-Type", "Authorization"], // Allowed headers
+    credentials: false, // Set to true if using cookies
+  })
+);
+
+// ✅ FIX: Handle preflight requests explicitly
 app.options("*", (req, res) => {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
   res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
   res.sendStatus(200);
 });
-app.use(
-  cors({ origin: "*", methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"] })
-);
 
 app.get("/", (req, res) => {
   res.send("Hello from api");
