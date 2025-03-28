@@ -9,19 +9,30 @@ MongoDB();
 app.use(helmet());
 app.use(express.json());
 
-// ✅ FIX: Configure CORS properly
+// ✅ FIX CORS: Set Explicit Allowed Origins
+const allowedOrigins = [
+  "https://hibi-order.vercel.app",
+  "http://localhost:5173",
+];
+
 app.use(
   cors({
-    origin: "*", // Allow all origins (or specify specific domains)
-    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"], // Allowed methods
-    allowedHeaders: ["Content-Type", "Authorization"], // Allowed headers
-    credentials: false, // Set to true if using cookies
+    origin: (origin, callback) => {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("CORS policy violation"), false);
+      }
+    },
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+    credentials: true, // ✅ Use this if you need cookies/sessions
   })
 );
 
-// ✅ FIX: Handle preflight requests explicitly
+// ✅ Fix Preflight Issues
 app.options("*", (req, res) => {
-  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Origin", req.headers.origin || "*");
   res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
   res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
   res.sendStatus(200);
