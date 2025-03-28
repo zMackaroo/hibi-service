@@ -31,8 +31,8 @@ app.get("/", (req, res) => {
   res.send("Hello from api");
 });
 
-app.use("/menu", menuRouter);
-app.use("/order", orderRouter);
+app.use("/api/menu", menuRouter);
+app.use("/api/order", orderRouter);
 
 app.listen(3000, () => {
   console.log("Server is running on port 3000");
