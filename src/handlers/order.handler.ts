@@ -14,6 +14,7 @@ export const createOrder = async (req: Request, res: Response) => {
   try {
     const { customerName, customerPhone, orders, totalPrice, status } =
       req.body;
+    console.log(req.body);
     const order = await orderSchema.create({
       customerName,
       customerPhone,

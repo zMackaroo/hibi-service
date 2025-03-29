@@ -13,6 +13,7 @@ export const getAllMenu = async (req: Request, res: Response) => {
 export const createMenu = async (req: Request, res: Response) => {
   try {
     const { name, price, description, image, category, isActive } = req.body;
+    console.log(req.body);
     const menu = await menuSchema.create({
       name,
       price,
